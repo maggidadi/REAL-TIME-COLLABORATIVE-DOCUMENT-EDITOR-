@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Collaborative Editor</title>
+</head>
+<body>
+    <h2>Real-Time Collaborative Editor</h2>
+    <textarea id="editor" rows="20" cols="60">{{ content }}</textarea>
+
+    <script>
+        const editor = document.getElementById("editor");
+
+        editor.addEventListener("input", () => {
+            fetch("/save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content: editor.value })
+            });
+        });
+    </script>
+</body>
+</html>
